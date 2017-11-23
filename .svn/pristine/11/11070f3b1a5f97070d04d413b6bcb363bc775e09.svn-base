@@ -1,0 +1,864 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <display-name></display-name>	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- 财务 -->
+  <filter>
+  	<filter-name>EncodeFilter</filter-name>
+  	<filter-class>com.filter.EncodeFilter</filter-class>
+  	<!-- 设置初始化参数 -->
+  	<init-param>
+  		<param-name>encod</param-name><!-- 参数名称 -->
+  		<param-value>utf-8</param-value><!-- 参数值 -->
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>EncodeFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- 登录过滤 -->
+  <filter>
+  	<filter-name>LoginFilter</filter-name>
+  	<filter-class>com.filter.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>LoginFilter</filter-name>
+  	<url-pattern>/gztm/*</url-pattern>
+  	<url-pattern>/temp.jsp</url-pattern>
+  	<url-pattern>/temp2.jsp</url-pattern>
+  	<url-pattern>/manage</url-pattern>
+  	<url-pattern>/CheckStock</url-pattern>
+  	<url-pattern>/SoMain</url-pattern>
+  	<url-pattern>/PoMain</url-pattern>
+  	
+  	<url-pattern>/PomainServlet</url-pattern>
+ 		<url-pattern>/VenderServlet</url-pattern>
+ 		<url-pattern>/PomainGetPreFinishServlet</url-pattern>
+ 		<url-pattern>/PomainBeforeAddServlet</url-pattern>
+ 		<url-pattern>/gztm/pomainStatement.jsp</url-pattern>
+  		
+ 		<url-pattern>/SelectAllPomain</url-pattern>
+  	<url-pattern>/SelectAllSomain</url-pattern>
+  	<url-pattern>/SelectAllStock</url-pattern>
+  	<url-pattern>/SelectCategory</url-pattern>
+  	<url-pattern>/SelectProduct</url-pattern>
+  	
+  	<url-pattern>/AddCustomServlet</url-pattern>
+		<url-pattern>/AddMainItemServlet</url-pattern>
+		<url-pattern>/AddSellOrderServlet</url-pattern>
+		<url-pattern>/EnterFindServlet</url-pattern>
+		<url-pattern>/FinishServlet</url-pattern>
+		<url-pattern>/SellFormServlet</url-pattern>
+		<url-pattern>/ShowDetail</url-pattern>
+		<url-pattern>/UpdateCustomServlet</url-pattern>
+	
+		<url-pattern>/building.html</url-pattern>
+  </filter-mapping>
+  <!-- /登录过滤 -->
+  
+  <!-- 权限过滤 -->
+  <filter>
+ 		<filter-name>AuthFilter_Illegal</filter-name>
+  	<filter-class>com.filter.AuthFilter_Illegal</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>AuthFilter_Illegal</filter-name>
+  	<url-pattern>/gztm/*</url-pattern>
+  </filter-mapping>
+  
+   <filter>
+ 		<filter-name>AuthFilter_RS</filter-name>
+  	<filter-class>com.filter.AuthFilter_RS</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>AuthFilter_RS</filter-name>
+  	<url-pattern>/manage</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+ 		<filter-name>AuthFilter_CG</filter-name>
+  	<filter-class>com.filter.AuthFilter_CG</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>AuthFilter_CG</filter-name>
+  	<url-pattern>/PomainServlet</url-pattern>
+ 		<url-pattern>/VenderServlet</url-pattern>
+ 		<url-pattern>/PomainGetPreFinishServlet</url-pattern>
+ 		<url-pattern>/PomainBeforeAddServlet</url-pattern>
+ 		<url-pattern>/gztm/pomainStatement.jsp</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+ 		<filter-name>AuthFilter_CC</filter-name>
+  	<filter-class>com.filter.AuthFilter_CC</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>AuthFilter_CC</filter-name>
+  	<url-pattern>/SelectAllPomain</url-pattern>
+  	<url-pattern>/SelectAllSomain</url-pattern>
+  	<url-pattern>/SelectAllStock</url-pattern>
+  	
+  	<url-pattern>/gztm/month_instock_form.jsp</url-pattern>
+  	<url-pattern>/gztm/month_outstock_form.jsp</url-pattern>
+  	<url-pattern>/gztm/stockForm.jsp</url-pattern>
+  	<url-pattern>/CheckStock</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+ 		<filter-name>AuthFilter_CW</filter-name>
+  	<filter-class>com.filter.AuthFilter_CW</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>AuthFilter_CW</filter-name>
+  	<url-pattern>/gztm/queryMoney.jsp</url-pattern>
+  	<url-pattern>/SoMain</url-pattern>
+  	<url-pattern>/PoMain</url-pattern>
+  	<url-pattern>/gztm/ioForm.jsp</url-pattern>
+  </filter-mapping>
+  
+  <filter>
+ 		<filter-name>AuthFilter_XS</filter-name>
+  	<filter-class>com.filter.AuthFilter_XS</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>AuthFilter_XS</filter-name>
+  	<url-pattern>/AddCustomServlet</url-pattern>
+		<url-pattern>/AddMainItemServlet</url-pattern>
+		<url-pattern>/AddSellOrderServlet</url-pattern>
+		<url-pattern>/EnterFindServlet</url-pattern>
+		<url-pattern>/FinishServlet</url-pattern>
+		<url-pattern>/SellFormServlet</url-pattern>
+		<url-pattern>/ShowDetail</url-pattern>
+	<url-pattern>/UpdateCustomServlet</url-pattern>
+	<url-pattern>/SelectCategory</url-pattern>
+  	<url-pattern>/SelectProduct</url-pattern>
+  </filter-mapping>
+  <!-- /权限过滤 -->
+  
+   <!-- <filter>
+  	<filter-name>PowerFilter</filter-name>
+  	<filter-class>com.filter.PowerFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>PowerFilter</filter-name>
+  	<url-pattern>/gztm/*</url-pattern>
+  	<url-pattern>/gztm/queryMoney.jsp</url-pattern>
+  	<url-pattern>/manage</url-pattern>
+  	<url-pattern>/CheckStock</url-pattern>
+  	<url-pattern>/SoMain</url-pattern>
+  	<url-pattern>/PoMain</url-pattern>
+  </filter-mapping>-->
+   <servlet>
+    <servlet-name>UserManageServlet</servlet-name>
+    <servlet-class>com.servlet.UserManageServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddScmUserServlet</servlet-name>
+    <servlet-class>com.servlet.AddScmUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UpdateScmUserServlet</servlet-name>
+    <servlet-class>com.servlet.UpdateScmUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DeleteScmUserServlet</servlet-name>
+    <servlet-class>com.servlet.DeleteScmUserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UpdateScmUserServlet1</servlet-name>
+    <servlet-class>com.servlet.UpdateScmUserServlet1</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CheckStockServlet</servlet-name>
+    <servlet-class>com.servlet.CheckStockServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>StockServlet</servlet-name>
+    <servlet-class>com.servlet.StockServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CountToChangeServlet</servlet-name>
+    <servlet-class>com.servlet.CountToChangeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SoMainServlet</servlet-name>
+    <servlet-class>com.servlet.SoMainServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SoItemServlet</servlet-name>
+    <servlet-class>com.servlet.SoItemServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>InMoneyServlet</servlet-name>
+    <servlet-class>com.servlet.InMoneyServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PoMainServlet</servlet-name>
+    <servlet-class>com.servlet.PoMainServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>PoItemServlet</servlet-name>
+    <servlet-class>com.servlet.PoItemServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>OutMoneyServlet</servlet-name>
+    <servlet-class>com.servlet.OutMoneyServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>QueryInOrOutServlet</servlet-name>
+    <servlet-class>com.servlet.QueryInOrOutServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>IoFormServlet</servlet-name>
+    <servlet-class>com.servlet.IoFormServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>IoFormItemServlet</servlet-name>
+    <servlet-class>com.servlet.IoFormItemServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>StockFormServlet</servlet-name>
+    <servlet-class>com.servlet.StockFormServlet</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>UserManageServlet</servlet-name>
+    <url-pattern>/manage</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddScmUserServlet</servlet-name>
+    <url-pattern>/adduser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdateScmUserServlet</servlet-name>
+    <url-pattern>/updateScmUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteScmUserServlet</servlet-name>
+    <url-pattern>/DeleteScmUser</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdateScmUserServlet1</servlet-name>
+    <url-pattern>/UpdateScmUser1</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CheckStockServlet</servlet-name>
+    <url-pattern>/CheckStock</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StockServlet</servlet-name>
+    <url-pattern>/Stock</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CountToChangeServlet</servlet-name>
+    <url-pattern>/CountToChange</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SoMainServlet</servlet-name>
+    <url-pattern>/SoMain</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SoItemServlet</servlet-name>
+    <url-pattern>/SoItem</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>InMoneyServlet</servlet-name>
+    <url-pattern>/InMoney</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PoMainServlet</servlet-name>
+    <url-pattern>/PoMain</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>PoItemServlet</servlet-name>
+    <url-pattern>/PoItem</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OutMoneyServlet</servlet-name>
+    <url-pattern>/OutMoney</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QueryInOrOutServlet</servlet-name>
+    <url-pattern>/QueryInOrOut</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>IoFormServlet</servlet-name>
+    <url-pattern>/IoForm</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>IoFormItemServlet</servlet-name>
+    <url-pattern>/IoFormItem</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StockFormServlet</servlet-name>
+    <url-pattern>/StockForm</url-pattern>
+  </servlet-mapping>
+  <!-- /财务 -->
+  
+  <!-- 仓管 -->
+  	 <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectProductServlet</servlet-name>
+    <servlet-class>com.servlet.SelectProductServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectCategoryServlet</servlet-name>
+    <servlet-class>com.servlet.SelectCategoryServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddCategoryServlet</servlet-name>
+    <servlet-class>com.servlet.AddCategoryServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DeleteCategoryServlet</servlet-name>
+    <servlet-class>com.servlet.DeleteCategoryServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DisplayUpdateContentServlet</servlet-name>
+    <servlet-class>com.servlet.DisplayUpdateContentServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UpdateCategoryServlet</servlet-name>
+    <servlet-class>com.servlet.UpdateCategoryServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddProductServlet</servlet-name>
+    <servlet-class>com.servlet.AddProductServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DeleteProductServlet</servlet-name>
+    <servlet-class>com.servlet.DeleteProductServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DisplayUpdateProductServlet</servlet-name>
+    <servlet-class>com.servlet.DisplayUpdateProductServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UpdateProductServlet</servlet-name>
+    <servlet-class>com.servlet.UpdateProductServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectAllPomainServlet</servlet-name>
+    <servlet-class>com.servlet.SelectAllPomainServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectPayTypePomainServlet</servlet-name>
+    <servlet-class>com.servlet.SelectPayTypePomainServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>In_DetialServlet</servlet-name>
+    <servlet-class>com.servlet.In_DetialServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>InStockServlet</servlet-name>
+    <servlet-class>com.servlet.InStockServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectAllSomainServlet</servlet-name>
+    <servlet-class>com.servlet.SelectAllSomainServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Out_DetialServlet</servlet-name>
+    <servlet-class>com.servlet.Out_DetialServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectPayTypeSomainServlet</servlet-name>
+    <servlet-class>com.servlet.SelectPayTypeSomainServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>OutStockServlet</servlet-name>
+    <servlet-class>com.servlet.OutStockServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Month_Instock_FormServlet</servlet-name>
+    <servlet-class>com.servlet.Month_Instock_FormServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Month_Outstock_FormServlet</servlet-name>
+    <servlet-class>com.servlet.Month_Outstock_FormServlet</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectAllStockServlet</servlet-name>
+    <servlet-class>com.servlet.SelectAllStockServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>/StockChangeRecord</servlet-name>
+    <servlet-class>com.servlet.StockChangeRecordServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SelectStockByConditions</servlet-name>
+    <servlet-class>com.servlet.SelectStockByConditions</servlet-class>
+  </servlet>
+
+
+  <servlet-mapping>
+    <servlet-name>SelectProductServlet</servlet-name>
+    <url-pattern>/SelectProduct</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelectCategoryServlet</servlet-name>
+    <url-pattern>/SelectCategory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddCategoryServlet</servlet-name>
+    <url-pattern>/AddCategory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteCategoryServlet</servlet-name>
+    <url-pattern>/DeleteCategory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DisplayUpdateContentServlet</servlet-name>
+    <url-pattern>/DisplayUpdateContent</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdateCategoryServlet</servlet-name>
+    <url-pattern>/UpdateCategory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddProductServlet</servlet-name>
+    <url-pattern>/AddProduct</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeleteProductServlet</servlet-name>
+    <url-pattern>/DeleteProduct</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DisplayUpdateProductServlet</servlet-name>
+    <url-pattern>/DisplayUpdateProduct</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdateProductServlet</servlet-name>
+    <url-pattern>/UpdateProduct</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelectAllPomainServlet</servlet-name>
+    <url-pattern>/SelectAllPomain</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelectPayTypePomainServlet</servlet-name>
+    <url-pattern>/SelectPayTypePomain</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>In_DetialServlet</servlet-name>
+    <url-pattern>/In_Detial</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>InStockServlet</servlet-name>
+    <url-pattern>/InStock</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelectAllSomainServlet</servlet-name>
+    <url-pattern>/SelectAllSomain</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Out_DetialServlet</servlet-name>
+    <url-pattern>/Out_Detial</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelectPayTypeSomainServlet</servlet-name>
+    <url-pattern>/SelectPayTypeSomain</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>OutStockServlet</servlet-name>
+    <url-pattern>/OutStock</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Month_Instock_FormServlet</servlet-name>
+    <url-pattern>/Month_Instock_Form</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Month_Outstock_FormServlet</servlet-name>
+    <url-pattern>/Month_Outstock_Form</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelectAllStockServlet</servlet-name>
+    <url-pattern>/SelectAllStock</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>/StockChangeRecord</servlet-name>
+    <url-pattern>/StockChangeRecord</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SelectStockByConditions</servlet-name>
+    <url-pattern>/SelectStockByConditions</url-pattern>
+  </servlet-mapping>
+  
+  <!-- <filter>
+  	<filter-name>auth</filter-name>
+  	<filter-class>com.filter.AuthFilter</filter-class>
+  </filter>
+   <filter-mapping>
+  	<filter-name>auth</filter-name>
+  	<url-pattern>/gztm/*</url-pattern>
+  	<url-pattern>/SelectAllPomain</url-pattern>
+  	<url-pattern>/SelectAllSomain</url-pattern>
+  	<url-pattern>/SelectAllStock</url-pattern>
+  	<url-pattern>/SelectCategory</url-pattern>
+  	<url-pattern>/SelectProduct</url-pattern> 	
+  </filter-mapping>-->
+  <!-- /仓管 -->
+  
+  <!-- 采购 -->
+	  <!-- 供应商-->
+	  <servlet>
+	  	<servlet-name>VenderServlet</servlet-name>
+	  	<servlet-class>com.servlet.VenderServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>VenderServlet</servlet-name>
+	  	<url-pattern>/VenderServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	  	<servlet-name>VenderAddServlet</servlet-name>
+	  	<servlet-class>com.servlet.VenderAddServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>VenderAddServlet</servlet-name>
+	  	<url-pattern>/VenderAddServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	  	<servlet-name>VenderDelServlet</servlet-name>
+	  	<servlet-class>com.servlet.VenderDelServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>VenderDelServlet</servlet-name>
+	  	<url-pattern>/VenderDelServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	   <servlet>
+	  	<servlet-name>VenderGetModifyServlet</servlet-name>
+	  	<servlet-class>com.servlet.VenderGetModifyServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>VenderGetModifyServlet</servlet-name>
+	  	<url-pattern>/VenderGetModifyServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	   <servlet>
+	  	<servlet-name>VenderModifyServlet</servlet-name>
+	  	<servlet-class>com.servlet.VenderModifyServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>VenderModifyServlet</servlet-name>
+	  	<url-pattern>/VenderModifyServlet</url-pattern>
+	  </servlet-mapping>
+  	<!-- /供应商-->
+  	<!-- 采购单-->
+  	 <servlet>
+	  	<servlet-name>PomainServlet</servlet-name>
+	  	<servlet-class>com.servlet.PomainServlet_CG</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>PomainServlet</servlet-name>
+	  	<url-pattern>/PomainServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	   <servlet>
+	  	<servlet-name>PomainDelServlet</servlet-name>
+	  	<servlet-class>com.servlet.PomainDelServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>PomainDelServlet</servlet-name>
+	  	<url-pattern>/PomainDelServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	   <servlet>
+	  	<servlet-name>PomainBeforeAddServlet</servlet-name>
+	  	<servlet-class>com.servlet.PomainBeforeAddServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>PomainBeforeAddServlet</servlet-name>
+	  	<url-pattern>/PomainBeforeAddServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	   <servlet>
+	  	<servlet-name>PomainAddServlet</servlet-name>
+	  	<servlet-class>com.servlet.PomainAddServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>PomainAddServlet</servlet-name>
+	  	<url-pattern>/PomainAddServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	  	<servlet-name>PomainGetModifyServlet</servlet-name>
+	  	<servlet-class>com.servlet.PomainGetModifyServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>PomainGetModifyServlet</servlet-name>
+	  	<url-pattern>/PomainGetModifyServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	  	<servlet-name>PomainModifyServlet</servlet-name>
+	  	<servlet-class>com.servlet.PomainModifyServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>PomainModifyServlet</servlet-name>
+	  	<url-pattern>/PomainModifyServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	  	<servlet-name>PomainGetPreFinishServlet</servlet-name>
+	  	<servlet-class>com.servlet.PomainGetPreFinishServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>PomainGetPreFinishServlet</servlet-name>
+	  	<url-pattern>/PomainGetPreFinishServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	  	<servlet-name>PomainFinishServlet</servlet-name>
+	  	<servlet-class>com.servlet.PomainFinishServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>PomainFinishServlet</servlet-name>
+	  	<url-pattern>/PomainFinishServlet</url-pattern>
+	  </servlet-mapping>
+	  
+	  <servlet>
+	  	<servlet-name>PomainShowAllServlet</servlet-name>
+	  	<servlet-class>com.servlet.PomainShowAllServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>PomainShowAllServlet</servlet-name>
+	  	<url-pattern>/PomainShowAllServlet</url-pattern>
+	  </servlet-mapping>
+	  <!-- /采购单-->
+	  <!-- 采购单查询-->
+	  <servlet>
+	  	<servlet-name>PomainSearchServlet</servlet-name>
+	  	<servlet-class>com.servlet.PomainSearchServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>PomainSearchServlet</servlet-name>
+	  	<url-pattern>/PomainSearchServlet</url-pattern>
+	  </servlet-mapping>
+	  <!-- /采购单查询-->
+	  <!-- 采购报表-->
+	  <servlet>
+	  	<servlet-name>PomainStatementServlet</servlet-name>
+	  	<servlet-class>com.servlet.PomainStatementServlet</servlet-class>
+	  </servlet>
+	  <servlet-mapping>
+	  	<servlet-name>PomainStatementServlet</servlet-name>
+	  	<url-pattern>/PomainStatementServlet</url-pattern>
+	  </servlet-mapping>
+	  <!-- /采购报表-->
+  	<!-- 采购过滤-->
+  	
+  	<!--<filter>
+  		<filter-name>PomainAuthFilter</filter-name>
+  		<filter-class>com.filter.PomainAuthFilter</filter-class>
+  	</filter>
+  	<filter-mapping>
+  		<filter-name>PomainAuthFilter</filter-name>
+  		<url-pattern>/PomainServlet</url-pattern>
+  		<url-pattern>/VenderServlet</url-pattern>
+  		<url-pattern>/PomainGetPreFinishServlet</url-pattern>
+  		<url-pattern>/PomainBeforeAddServlet</url-pattern>
+  		<url-pattern>/gztm/pomainStatement.jsp</url-pattern>
+  	</filter-mapping>-->
+  	<!-- /采购过滤-->
+  	
+  <!-- /采购 -->
+  
+ 	<!-- 销售 -->
+ 	<servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddClassServlet</servlet-name>
+    <servlet-class>com.servlet.AddClassServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddCustomServlet</servlet-name>
+    <servlet-class>com.servlet.AddCustomServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UpdateCustomServlet</servlet-name>
+    <servlet-class>com.servlet.UpdateCustomServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddSellOrderServlet</servlet-name>
+    <servlet-class>com.servlet.AddSellOrderServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddMainItemServlet</servlet-name>
+    <servlet-class>com.servlet.AddMainItemServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>EnterFindServlet</servlet-name>
+    <servlet-class>com.servlet.EnterFindServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShowDetail</servlet-name>
+    <servlet-class>com.servlet.ShowDetail</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>FinishServlet</servlet-name>
+    <servlet-class>com.servlet.FinishServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>SellFormServlet</servlet-name>
+    <servlet-class>com.servlet.SellFormServlet</servlet-class>
+  </servlet>
+
+<!-- filter>
+	<filter-name>LoginFilter</filter-name>
+	<filter-class>com.Filter.LoginFilter</filter-class>
+</filter
+<filter-mapping>
+	<filter-name>LoginFilter</filter-name>
+	<url-pattern>/AddCustomServlet</url-pattern>
+	<url-pattern>/AddMainItemServlet</url-pattern>
+	<url-pattern>/AddSellOrderServlet</url-pattern>
+	<url-pattern>/EnterFindServlet</url-pattern>
+	<url-pattern>/FinishServlet</url-pattern>
+	<url-pattern>/SellFormServlet</url-pattern>
+	<url-pattern>/ShowDetail</url-pattern>
+	<url-pattern>/UpdateCustomServlet</url-pattern>
+</filter-mapping>-->
+
+
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>AddClassServlet</servlet-name>
+    <url-pattern>/AddClassServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddCustomServlet</servlet-name>
+    <url-pattern>/AddCustomServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UpdateCustomServlet</servlet-name>
+    <url-pattern>/UpdateCustomServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddSellOrderServlet</servlet-name>
+    <url-pattern>/AddSellOrderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddMainItemServlet</servlet-name>
+    <url-pattern>/AddMainItemServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EnterFindServlet</servlet-name>
+    <url-pattern>/EnterFindServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowDetail</servlet-name>
+    <url-pattern>/ShowDetail</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>FinishServlet</servlet-name>
+    <url-pattern>/FinishServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SellFormServlet</servlet-name>
+    <url-pattern>/SellFormServlet</url-pattern>
+  </servlet-mapping>
+ 	
+ 	<!-- /销售 -->
+</web-app>
